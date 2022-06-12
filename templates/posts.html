@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block  head %}
+<title>post</title>
+{% endblock %}
+
+
+{% block  body %}
+
+    <hr>
+    <h2>Create New Bolg Post:</h2>
+    <form action="/posts" method="POST">
+            <strong>Author: </strong>
+            <br>
+            <br>
+            <input class="form-control mr-sm-2" type="text" name='author' id='author' placeholder="Author name" aria-label="Author name">
+           <br>
+           <strong>Title :</strong>
+           <br> <br>
+           <input class="form-control mr-sm-2" type="text" name='title' id='title' placeholder="Enter title" aria-label="Enter title">
+           <br><br>
+         
+       
+           <strong>post:</strong>
+           <br> <br>
+            <textarea   class="form-control" name='content'  id='content' rows="3" placeholder="content"></textarea>
+          
+           
+           <br>
+           <input class="btn btn-primary"  type='submit' value="Post">
+      
+   
+
+
+
+
+    </form>
+    <hr>
+
+    {% for post in posts %}
+       <br>
+       <h1>{{ post.title }}</h1>
+    
+       {% if post.author %}
+             <small> written By : {{ post.author }} on {{ post.data_posted  }}<small>
+        {% else %}
+              <h3>By : N/A</h3>
+        {% endif %}  
+        <br><br>         
+
+        <h6 style="white-space: pre-wrap;">{{ post.content }}</h6>
+
+        <br>
+        <a class="btn btn-danger" href='/posts/delete/{{ post.id }}'>Delete</a>
+        <a class="btn btn-primary" href='/posts/edit/{{ post.id }}'>Edit</a>
+        <hr>
+    {% endfor %}
+
+
+
+
+
+{% endblock %}
